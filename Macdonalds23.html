@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McDonald's Food Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("Macdonalds.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    align-items: center;
+    height: 200vh;
+}
+
+header {
+    background-color: #f8d000;
+    padding: 20px;
+    text-align: center;
+}
+
+header nav {
+    margin-top: 10px;
+}
+
+header nav a {
+    margin: 0 15px;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#menu {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.menu-item {
+    text-align: center;
+    margin: 10px;
+}
+
+.menu-item img {
+    width: 150px;
+    height: 150px;
+}
+
+button {
+    background-color: #f8d000;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #e1c300;
+}
+
+#order-form {
+    padding: 20px;
+    text-align: center;
+}
+
+#order-list {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+nav{
+    position: relative;
+}
+.img1{
+    position: relative;
+    left: 40%;
+    display: inline-block;
+}
+.img2{
+    position: relative;
+    right: 35%;
+    width: 100px;
+}
+nav a:hover{
+    background-color: green;
+    padding: 10px;
+}
+.im1:hover{
+height: 400px;
+width: 500px;
+transition: height 0.5s;
+}
+.im1{
+    transition: height 0.5s;
+    transition: width 0.5s;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <img class="img2" src="location_53876-25530.avif" alt="">
+
+        <img src="Macdonalds1.jpg" alt="" class="img1">
+       
+        <nav>
+            <a href="#menu">Menu</a>
+            <a href="#order-form">Order</a>
+            <a href="">Delivery</a>
+            <a href="">Tips</a>
+            <a href="">After service</a>
+            <a href="">Contact</a>
+        </nav>
+    </header>
+
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-item">
+            <img src="Burger.jpg" alt="Burger" class="im1">
+            <p>Burger - Ksh 300/=</p>
+            <button onclick="addToCart('Burger', 5.99)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+            <img src="Fries.jpg" alt="Fries" class="im1">
+            <p>Fries - 500/=</p>
+            <button onclick="addToCart('Fries', 2.99)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+            <img src="Mcdonalds-Drinks-Menu.webp" alt="Drink" width="100" class="im1">
+            <p>Drink - 450/=</p>
+            <button onclick="addToCart('Drink', 1.99)">Add to Cart</button>
+        </div>
+    </section>
+
+    <section id="order-form">
+        <h2>Order Summary</h2>
+        <ul id="order-list"></ul>
+        <p>Total: Ksh<span id="total-price">0.00</span></p>
+        <button onclick="submitOrder()">Submit Order</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 McDonald's Delivery</p>
+    </footer>
+
+    <script src="script.js">
+        let cart = [];
+let totalPrice = 0;
+
+function addToCart(item, price) {
+    cart.push({ item, price });
+    totalPrice += price;
+    updateOrderSummary();
+}
+
+function updateOrderSummary() {
+    const orderList = document.getElementById('order-list');
+    orderList.innerHTML = '';
+    cart.forEach((entry, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${entry.item} - $${entry.price.toFixed(2)}`;
+        orderList.appendChild(li);
+    });
+
+    const totalPriceElement = document.getElementById('total-price');
+    totalPriceElement.textContent = totalPrice.toFixed(2);
+}
+
+function submitOrder() {
+    if (cart.length === 0) {
+        alert('Please add items to your order.');
+        return;
+    }
+    alert('Your order has been placed successfully!');
+    cart = [];
+    totalPrice = 0;
+    updateOrderSummary();
+}
+
+    </script>
+</body>
+</html>
